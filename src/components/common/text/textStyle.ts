@@ -6,22 +6,32 @@ type textPropsType = {
 };
 
 export const TextStyle = styled.p<textPropsType>`
-  ${({ theme }) => css`
-    position: relative;
+  ${({ theme, type, $bold }) => css`
     color: ${theme.colors['text-primary']};
 
-    &:hover,
-    &:focus {
-      &::after {
-        content: '';
-        position: absolute;
-        left: 0;
-        bottom: -4px;
-        display: block;
-        width: 100%;
-        height: 1px;
-        background-color: ${theme.colors['palette-primary']};
-      }
-    }
+    ${type == 'body1' &&
+    css`
+      font-weight: 500;
+      font-size: 20px;
+      line-height: 1;
+    `}
+    ${type == 'body2' &&
+    css`
+      font-weight: ${$bold ? 700 : 500};
+      font-size: 14px;
+      line-height: 1;
+    `}
+    ${type == 'caption' &&
+    css`
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 1;
+    `}
+    ${type == 'small' &&
+    css`
+      font-weight: 500;
+      font-size: 10px;
+      line-height: 1;
+    `}
   `}
 `;
