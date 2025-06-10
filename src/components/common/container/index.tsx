@@ -1,12 +1,12 @@
 import React from 'react';
 import { ContainerStyle } from './containerStyle';
 
-type ContainerPropType = {
+type ContainerPropsType = {
   className?: string;
   children: React.ReactNode;
 };
 
-function Container({ children }: ContainerPropType) {
+function Container({ children }: ContainerPropsType) {
   return <ContainerStyle>{children}</ContainerStyle>;
 }
 
