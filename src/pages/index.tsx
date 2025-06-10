@@ -1,6 +1,10 @@
-import Container from '@/components/common/container';
-import Header from '@/components/header';
 import Head from 'next/head';
+import Container from '@/components/common/container';
+import Title from '@/components/common/title';
+
+import Header from '@/components/header';
+import SearchBox from '@/components/searchBox';
+import BookResult from '@/components/bookResult';
 
 export default function Home() {
   return (
@@ -12,7 +16,9 @@ export default function Home() {
       <main>
         <Header />
         <Container>
-          <h1>Welcome to My Next.js App!</h1>
+          <Title role={1}>도서 검색</Title>
+          <SearchBox />
+          <BookResult />
         </Container>
       </main>
     </>

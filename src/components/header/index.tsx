@@ -1,8 +1,8 @@
 import React from 'react';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import { HeaderStyle, NavStyle } from './headerStyle';
 import Button from '@components/common/button';
-import { useRouter } from 'next/router';
 import Text from '@components/common/text';
 
 function Header() {
@@ -10,17 +10,19 @@ function Header() {
 
   const menuData = [
     {
+      id: 'search',
       menu: '도서 검색',
-      url: '#',
+      url: '/',
     },
     {
+      id: 'pickup',
       menu: '내가 찜한 책',
-      url: '#',
+      url: '/pickup',
     },
   ];
 
   const handleClick = (url: string) => {
-    router.push(`/${url}`);
+    router.push(`${url}`);
   };
 
   return (
@@ -29,8 +31,12 @@ function Header() {
       <NavStyle>
         {menuData.map((item) => {
           return (
-            <li key={item.menu}>
-              <Button type="text" onClick={() => handleClick(item.url)}>
+            <li key={item.id}>
+              <Button
+                type="text"
+                onClick={() => handleClick(item.url)}
+                className={router.pathname == item.url ? 'on' : ''}
+              >
                 <Text type="body1">{item.menu}</Text>
               </Button>
             </li>
