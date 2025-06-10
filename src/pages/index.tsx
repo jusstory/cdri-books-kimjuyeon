@@ -1,4 +1,6 @@
-import Head from 'next/head'
+import Container from '@/components/common/container';
+import Header from '@/components/header';
+import Head from 'next/head';
 
 export default function Home() {
   return (
@@ -8,8 +10,11 @@ export default function Home() {
         <meta name="description" content="" />
       </Head>
       <main>
-        <h1>Welcome to My Next.js App!</h1>
+        <Header />
+        <Container>
+          <h1>Welcome to My Next.js App!</h1>
+        </Container>
       </main>
     </>
-  )
+  );
 }
