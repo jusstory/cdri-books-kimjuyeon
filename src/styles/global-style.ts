@@ -8,30 +8,30 @@ export const GlobalStyle = createGlobalStyle`
     font-family: 'Noto Sans KR';
     font-style: normal;
     font-weight: 200;
-    src: url('/Font/notokr-light.eot');
-    src: url('/Font/notokr-light.eot?#iefix') format('embedded-opentype'),
-    url('/Font/notokr-light.woff2') format('woff2'),
-    url('/Font/notokr-light.woff') format('woff');
+    src: url('/fonts/notokr-light.eot');
+    src: url('/fonts/notokr-light.eot?#iefix') format('embedded-opentype'),
+    url('/fonts/notokr-light.woff2') format('woff2'),
+    url('/fonts/notokr-light.woff') format('woff');
   }
   
   @font-face {
     font-family: 'Noto Sans KR';
     font-style: normal;
     font-weight: 400;
-    src: url('/Font/notokr-regular.eot');
-    src: url('/Font/notokr-regular.eot?#iefix') format('embedded-opentype'),
-    url('/Font/notokr-regular.woff2') format('woff2'),
-    url('/Font/notokr-regular.woff') format('woff');
+    src: url('/fonts/notokr-regular.eot');
+    src: url('/fonts/notokr-regular.eot?#iefix') format('embedded-opentype'),
+    url('/fonts/notokr-regular.woff2') format('woff2'),
+    url('/fonts/notokr-regular.woff') format('woff');
   }
   
   @font-face {
     font-family: 'Noto Sans KR';
     font-style: normal;
     font-weight: 500;
-    src: url('/Font/notokr-medium.eot');
-    src: url('/Font/notokr-medium.eot?#iefix') format('embedded-opentype'),
-    url('/Font/notokr-medium.woff2') format('woff2'),
-    url('/Font/notokr-medium.woff') format('woff');
+    src: url('/fonts/notokr-medium.eot');
+    src: url('/fonts/notokr-medium.eot?#iefix') format('embedded-opentype'),
+    url('/fonts/notokr-medium.woff2') format('woff2'),
+    url('/fonts/notokr-medium.woff') format('woff');
   }
   /* CSS 초기화 */
   * {
