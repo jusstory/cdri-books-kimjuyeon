@@ -10,7 +10,6 @@ export const SearchbarStyle = styled.div`
     max-width: 480px;
     min-height: 50px;
     padding: 10px;
-    margin: 25px 0;
     border-radius: 25px;
     background-color: ${theme.colors['palette-lightGray']};
   `}

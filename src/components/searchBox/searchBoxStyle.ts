@@ -15,6 +15,7 @@ export const SearchBoxStyle = styled.div`
     display: flex;
     gap: 16px;
     align-items: center;
+    margin: 25px 0;
     color: ${theme.colors['text-primary']};
   `}
 `;

@@ -1,24 +1,26 @@
+import React from 'react';
 import Head from 'next/head';
 import { Container } from '@/components/common/container';
 import { Title } from '@/components/common/title';
-
-import { SearchBox } from '@/components/searchBox';
+import { SearchCountBox } from '@/components/searchBox';
 import { BookResult } from '@/components/searchResult';
 
-export default function Home() {
+function Pickup() {
   return (
     <>
       <Head>
-        <title>도서 검색</title>
+        <title>내가 찜한 책</title>
         <meta name="description" content="" />
       </Head>
       <main>
         <Container>
-          <Title role={1}>도서 검색</Title>
-          <SearchBox />
+          <Title role={1}>내가 찜한 책</Title>
+          <SearchCountBox />
           <BookResult />
         </Container>
       </main>
     </>
   );
 }
+
+export default Pickup;

@@ -5,4 +5,8 @@ export const ContainerStyle = styled.div`
   max-width: 960px;
   margin: 0 auto;
   padding-top: 80px;
+
+  h1 {
+    margin-bottom: 25px;
+  }
 `;

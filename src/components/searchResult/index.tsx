@@ -1,0 +1,1 @@
+export { BookResult } from './bookResult';
