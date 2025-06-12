@@ -2,9 +2,10 @@ import React from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { Text } from '@components/common/text';
-import { BookResultStyle, NoDataBoxStyle } from './bookResultStyle';
+import { BookResultStyle, NoDataBoxStyle } from './resultStyle';
+import BookList from './bookList';
 
-function BookResult() {
+function BookResult({}) {
   const router = useRouter();
 
   return (
@@ -17,6 +18,7 @@ function BookResult() {
           <Text type="caption">검색된 결과가 없습니다.</Text>
         )}
       </NoDataBoxStyle>
+      <BookList />
     </BookResultStyle>
   );
 }

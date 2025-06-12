@@ -6,22 +6,28 @@ import { GlobalStyle } from '@/styles/global-style';
 import theme from '@/styles/theme';
 import { Header } from '@/components/header';
 import { useState } from 'react';
+import { RecoilRoot } from 'recoil';
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [queryClient] = useState(() => new QueryClient());
 
   return (
     <QueryClientProvider client={queryClient}>
-      <ThemeProvider theme={theme}>
-        <Head>
-          <title>CERTICOS BOOKS</title>
-          <meta name="viewport" content="width=device-width, initial-scale=1" />
-        </Head>
+      <RecoilRoot>
+        <ThemeProvider theme={theme}>
+          <Head>
+            <title>CERTICOS BOOKS</title>
+            <meta
+              name="viewport"
+              content="width=device-width, initial-scale=1"
+            />
+          </Head>
 
-        <GlobalStyle />
-        <Header />
-        <Component {...pageProps} />
-      </ThemeProvider>
+          <GlobalStyle />
+          <Header />
+          <Component {...pageProps} />
+        </ThemeProvider>
+      </RecoilRoot>
     </QueryClientProvider>
   );
 }

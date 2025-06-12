@@ -7,10 +7,13 @@ import { BookResult } from '@/components/searchResult';
 import { useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { featchBookList } from '@/api/book/searchBook';
+import { useRecoilState } from 'recoil';
+import { keywordAtom } from '@store/searchBook/atom';
 
 export default function Home() {
-  const [keyword, setKeyword] = useState<string>('is');
+  const [keyword, setKeyword] = useRecoilState(keywordAtom);
   const [listData, setListData] = useState([]);
+  // thumbnail, title, authors, sale_price, isbn
 
   const { data, refetch } = useQuery({
     queryKey: ['books', keyword],
@@ -19,6 +22,7 @@ export default function Home() {
   });
 
   const handleSearch = async () => {
+    setKeyword('is');
     if (keyword.trim()) {
       await refetch()
         .then((res) => setListData(res.data))
@@ -42,6 +46,7 @@ export default function Home() {
         <Container>
           <Title role={1}>도서 검색</Title>
           <SearchBox />
+          {/* <BookResult bookListData={listData} /> */}
           <BookResult />
         </Container>
       </main>

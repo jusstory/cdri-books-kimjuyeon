@@ -22,3 +22,9 @@ export const NoDataBoxStyle = styled.div`
     }
   `}
 `;
+
+export const BookListItemStyle = styled.div`
+  ${({ theme }) => css`
+    width: 100%;
+  `}
+`;
