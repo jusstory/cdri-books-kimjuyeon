@@ -2,7 +2,7 @@ import React from 'react';
 import { ButtonStyle } from './buttonStyle';
 
 type ButtonPropsType = {
-  type: string | 'line';
+  type: 'primary' | 'secondary' | 'line';
   children: React.ReactNode;
   onClick?: () => void;
   className?: string;
