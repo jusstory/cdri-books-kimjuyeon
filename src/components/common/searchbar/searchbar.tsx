@@ -3,7 +3,13 @@ import Image from 'next/image';
 import { SearchbarStyle } from './searchbarStyle';
 import { SearchbarType } from './searchType';
 
-function Searchbar({ id, placeholder, value, onChange }: SearchbarType) {
+function Searchbar({
+  id,
+  placeholder,
+  value,
+  onChange,
+  onKeyDown,
+}: SearchbarType) {
   return (
     <SearchbarStyle>
       <Image
@@ -17,6 +23,7 @@ function Searchbar({ id, placeholder, value, onChange }: SearchbarType) {
         placeholder={placeholder}
         value={value ? value : ''}
         onChange={(e) => onChange(e)}
+        onKeyDown={onKeyDown}
       />
     </SearchbarStyle>
   );

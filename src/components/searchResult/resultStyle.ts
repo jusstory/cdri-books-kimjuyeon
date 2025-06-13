@@ -31,14 +31,9 @@ export const BookListItemStyle = styled.div`
     align-items: center;
     justify-content: space-between;
 
-    .thumbnail {
-      margin: 0 48px;
-    }
     .title_box {
       display: flex;
       align-items: center;
-      width: 50%;
-      max-width: 408px;
 
       .book_title {
         display: inline-block;
@@ -51,6 +46,95 @@ export const BookListItemStyle = styled.div`
       .authors {
         white-space: nowrap;
         color: ${theme.colors['text-secondary']};
+      }
+    }
+
+    &.open {
+      align-items: stretch;
+      padding-top: 8px;
+      padding-bottom: 24px;
+
+      .thumbnail {
+        margin: 0 32px;
+      }
+
+      .detail_button {
+        img {
+          transform: rotate(-180deg);
+        }
+      }
+    }
+    &.close {
+      .thumbnail {
+        margin: 0 48px;
+      }
+
+      .title_box {
+        width: 50%;
+        max-width: 408px;
+      }
+      .detail_button {
+        img {
+          transform: rotate(0deg);
+        }
+      }
+    }
+  `}
+`;
+
+export const BookItemOpenBoxStyle = styled.div`
+  ${({ theme }) => css`
+    display: flex;
+    gap: 16px;
+    width: 100%;
+
+    .contents_wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      width: 100%;
+
+      .title_box {
+        margin-top: 20px;
+      }
+
+      .contents_box {
+        .contents {
+          margin-top: 12px;
+          line-height: 26px;
+        }
+      }
+    }
+
+    .pricing_box {
+      width: 240px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      justify-content: space-between;
+
+      .bottom_box {
+        text-align: right;
+
+        .pricing_text {
+          & + .pricing_text {
+            margin-top: 8px;
+          }
+          p,
+          div,
+          h3 {
+            display: inline-block;
+          }
+
+          .is_sale h3 {
+            text-decoration: line-through;
+            font-weight: 300;
+          }
+        }
+        .payment_button {
+          width: 240px;
+          margin-top: 24px;
+        }
       }
     }
   `}

@@ -26,6 +26,12 @@ const SearchBox = forwardRef(function SearchBox() {
     enabled: false,
   });
 
+  const handleKeyDown = (e: any) => {
+    if (e.keyCode === 13 || e.key === 'Enter') {
+      handleSearch();
+    }
+  };
+
   const handleChange = (e) => {
     console.log(e.target.value);
     setSearchValue(e.target.value);
@@ -43,7 +49,9 @@ const SearchBox = forwardRef(function SearchBox() {
             thumbnail: item.thumbnail,
             title: item.title,
             authors: item.authors,
+            price: item.price,
             sale_price: item.sale_price,
+            contents: item.contents,
           }));
           setSearchResultCount(res.data.meta.total_count);
           setSearchResults(filteringData);
@@ -62,8 +70,9 @@ const SearchBox = forwardRef(function SearchBox() {
           placeholder="검색어를 입력하세요"
           onChange={handleChange}
           value={searchValue}
+          onKeyDown={handleKeyDown}
         />
-        <Button type="line" onClick={handleSearch}>
+        <Button type="line">
           <Text type="body2">상세검색</Text>
         </Button>
       </SearchBoxStyle>

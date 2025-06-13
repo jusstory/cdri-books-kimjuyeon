@@ -3,4 +3,5 @@ export interface SearchbarType {
   placeholder: string;
   value?: string | number;
   onChange?: (value: any) => void;
+  onKeyDown?: (e: any) => void;
 }
