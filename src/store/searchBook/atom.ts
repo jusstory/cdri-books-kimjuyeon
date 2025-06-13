@@ -5,3 +5,9 @@ export const keywordAtom = atom<string>({
   key: 'keyword',
   default: '',
 });
+
+// 검색 결과
+export const searchResultAtom = atom({
+  key: 'searchResultAtom',
+  default: [],
+});

@@ -28,10 +28,8 @@ interface TitlePropsType {
 
 function Title({ role, className, children }: TitlePropsType) {
   return (
-    <TitleStyle>
-      <TitleTagFilter role={role} className={className || ''}>
-        {children}
-      </TitleTagFilter>
+    <TitleStyle className={className || ''}>
+      <TitleTagFilter role={role}>{children}</TitleTagFilter>
     </TitleStyle>
   );
 }

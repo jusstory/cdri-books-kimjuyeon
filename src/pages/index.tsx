@@ -4,15 +4,16 @@ import { Title } from '@/components/common/title';
 
 import { SearchBox } from '@/components/searchBox';
 import { BookResult } from '@/components/searchResult';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { featchBookList } from '@/api/book/searchBook';
 import { useRecoilState } from 'recoil';
-import { keywordAtom } from '@store/searchBook/atom';
+import { keywordAtom, searchResultAtom } from '@store/searchBook/atom';
 
 export default function Home() {
   const [keyword, setKeyword] = useRecoilState(keywordAtom);
-  const [listData, setListData] = useState([]);
+  const [searchResults, setSearchResults] = useRecoilState(searchResultAtom);
+  // const [listData, setListData] = useState([]);
   // thumbnail, title, authors, sale_price, isbn
 
   const { data, refetch } = useQuery({
@@ -25,7 +26,17 @@ export default function Home() {
     setKeyword('is');
     if (keyword.trim()) {
       await refetch()
-        .then((res) => setListData(res.data))
+        .then((res) => {
+          const filteringData = res.data.map((item: any) => ({
+            id: item.isbn,
+            thumbnail: item.thumbnail,
+            title: item.title,
+            authors: item.authors,
+            sale_price: item.sale_price,
+          }));
+
+          setSearchResults(filteringData);
+        })
         .catch((err) => {
           console.log('error', err);
         });
