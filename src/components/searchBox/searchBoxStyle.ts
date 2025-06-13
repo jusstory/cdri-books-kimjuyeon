@@ -17,6 +17,44 @@ export const SearchBoxStyle = styled.div`
     align-items: center;
     margin: 25px 0;
     color: ${theme.colors['text-primary']};
+
+    .search_bar_wrap {
+      position: relative;
+      width: 100%;
+      max-width: 480px;
+
+      &.has_list {
+        .searchbar {
+          border-radius: 25px 25px 0 0;
+        }
+      }
+
+      .keyword_list {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        padding-left: 41px;
+        padding-top: 12px;
+        padding-bottom: 12px;
+        border-radius: 0 0 25px 25px;
+        background-color: ${theme.colors['palette-lightGray']};
+        z-index: 1;
+
+        li {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 4px 0;
+          padding-right: 25px;
+        }
+
+        p,
+        div {
+          color: ${theme.colors['text-subtitle']};
+        }
+      }
+    }
   `}
 `;
 

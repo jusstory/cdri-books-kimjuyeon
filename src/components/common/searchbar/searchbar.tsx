@@ -5,13 +5,16 @@ import { SearchbarType } from './searchType';
 
 function Searchbar({
   id,
+  className,
   placeholder,
   value,
   onChange,
   onKeyDown,
+  onFocus,
+  onBlur,
 }: SearchbarType) {
   return (
-    <SearchbarStyle>
+    <SearchbarStyle className={className}>
       <Image
         src="/images/ico_search.svg"
         alt="search icon"
@@ -24,6 +27,9 @@ function Searchbar({
         value={value ? value : ''}
         onChange={(e) => onChange(e)}
         onKeyDown={onKeyDown}
+        onFocus={onFocus}
+        onBlur={onBlur}
+        autoComplete="off"
       />
     </SearchbarStyle>
   );

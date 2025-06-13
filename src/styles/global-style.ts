@@ -52,6 +52,7 @@ export const GlobalStyle = createGlobalStyle`
     overflow-x: hidden;
     line-height: 1.25;
     background: #fff;
+    min-height: 100vh;
   }
   html, body, div, span, applet, object, iframe,
   h1, h2, h3, h4, h5, h6, p, blockquote, pre,
