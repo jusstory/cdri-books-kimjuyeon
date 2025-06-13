@@ -13,7 +13,7 @@ function BookResult({}) {
 
   return (
     <BookResultStyle>
-      {searchResults ? (
+      {searchResults.length > 0 ? (
         <BookList />
       ) : (
         <NoDataBoxStyle>

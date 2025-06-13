@@ -1,8 +1,9 @@
 import React from 'react';
 import Image from 'next/image';
 import { SearchbarStyle } from './searchbarStyle';
+import { SearchbarType } from './searchType';
 
-function Searchbar() {
+function Searchbar({ id, placeholder, value, onChange }: SearchbarType) {
   return (
     <SearchbarStyle>
       <Image
@@ -11,7 +12,12 @@ function Searchbar() {
         width={30}
         height={30}
       />
-      Searchbar
+      <input
+        id={id}
+        placeholder={placeholder}
+        value={value ? value : ''}
+        onChange={(e) => onChange(e)}
+      />
     </SearchbarStyle>
   );
 }

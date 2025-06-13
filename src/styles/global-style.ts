@@ -117,6 +117,7 @@ export const GlobalStyle = createGlobalStyle`
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
+    border: 0 none;
   }
   input:focus {
     outline: none;

@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { BookListItemStyle } from './resultStyle';
 import { List } from '../common/list';
-import { useQueryClient } from '@tanstack/react-query';
 import { useRecoilValue } from 'recoil';
-import { keywordAtom, searchResultAtom } from '@store/searchBook/atom';
+import { searchResultAtom } from '@store/searchBook/atom';
 import Image from 'next/image';
 import { Title } from '../common/title';
 import { Text } from '@/components/common/text';
@@ -12,10 +11,7 @@ import { Button } from '../common/button';
 
 function BookList() {
   //   const [listData, setListData] = useState();
-  const keyword = useRecoilValue(keywordAtom);
-  const queryClient = useQueryClient();
-  const cachedBooks = queryClient.getQueryData(['books', keyword]);
-  const listData = useRecoilValue(searchResultAtom);
+  const searchResults = useRecoilValue(searchResultAtom);
 
   const ListItem = ({ itemData }) => {
     return (
@@ -53,17 +49,9 @@ function BookList() {
     );
   };
 
-  useEffect(() => {
-    if (cachedBooks) {
-      console.log(cachedBooks);
-      console.log('listData', listData);
-      //   setListData(cachedBooks)
-    }
-  }, [cachedBooks]);
-
   return (
     <List
-      listItemData={listData.map((item) => {
+      listItemData={searchResults.map((item) => {
         return {
           id: item.id,
           contents: <ListItem itemData={item} />,

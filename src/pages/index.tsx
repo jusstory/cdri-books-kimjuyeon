@@ -4,49 +4,8 @@ import { Title } from '@/components/common/title';
 
 import { SearchBox } from '@/components/searchBox';
 import { BookResult } from '@/components/searchResult';
-import { useEffect } from 'react';
-import { useQuery } from '@tanstack/react-query';
-import { featchBookList } from '@/api/book/searchBook';
-import { useRecoilState } from 'recoil';
-import { keywordAtom, searchResultAtom } from '@store/searchBook/atom';
 
 export default function Home() {
-  const [keyword, setKeyword] = useRecoilState(keywordAtom);
-  const [searchResults, setSearchResults] = useRecoilState(searchResultAtom);
-  // const [listData, setListData] = useState([]);
-  // thumbnail, title, authors, sale_price, isbn
-
-  const { data, refetch } = useQuery({
-    queryKey: ['books', keyword],
-    queryFn: () => featchBookList(keyword),
-    enabled: false,
-  });
-
-  const handleSearch = async () => {
-    setKeyword('is');
-    if (keyword.trim()) {
-      await refetch()
-        .then((res) => {
-          const filteringData = res.data.map((item: any) => ({
-            id: item.isbn,
-            thumbnail: item.thumbnail,
-            title: item.title,
-            authors: item.authors,
-            sale_price: item.sale_price,
-          }));
-
-          setSearchResults(filteringData);
-        })
-        .catch((err) => {
-          console.log('error', err);
-        });
-    }
-  };
-
-  useEffect(() => {
-    handleSearch();
-  }, []);
-
   return (
     <>
       <Head>
@@ -57,7 +16,6 @@ export default function Home() {
         <Container>
           <Title role={1}>도서 검색</Title>
           <SearchBox />
-          {/* <BookResult bookListData={listData} /> */}
           <BookResult />
         </Container>
       </main>

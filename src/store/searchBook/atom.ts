@@ -11,3 +11,8 @@ export const searchResultAtom = atom({
   key: 'searchResultAtom',
   default: [],
 });
+
+export const searchResultCountAtom = atom({
+  key: 'searchResultCountAtom',
+  default: 0,
+});
