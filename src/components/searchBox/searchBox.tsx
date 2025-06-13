@@ -101,6 +101,8 @@ const SearchBox = forwardRef(function SearchBox() {
             }));
             setSearchResultCount(res.data.meta.total_count);
             setSearchResults(filteringData);
+            setSearchValue('');
+            setSearchDetailValue('');
           })
           .catch((err) => {
             console.log('error', err);
@@ -124,6 +126,8 @@ const SearchBox = forwardRef(function SearchBox() {
             }));
             setSearchResultCount(res.data.meta.total_count);
             setSearchResults(filteringData);
+            setSearchValue('');
+            setSearchDetailValue('');
           })
           .catch((err) => {
             console.log('error', err);
