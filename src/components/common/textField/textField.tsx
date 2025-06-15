@@ -10,7 +10,7 @@ interface TextFieldType {
   onKeyDown?: (e: any) => void;
 }
 
-const TextField = forwardRef(function TextField({
+function TextField({
   id,
   placeholder,
   value,
@@ -29,6 +29,6 @@ const TextField = forwardRef(function TextField({
       autoComplete="off"
     />
   );
-});
+}
 
 export { TextField };

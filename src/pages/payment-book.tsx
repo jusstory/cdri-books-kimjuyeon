@@ -3,7 +3,7 @@ import Head from 'next/head';
 import Image from 'next/image';
 import { Container } from '@/components/common/container';
 import { Title } from '@/components/common/title';
-import { useRecoilState } from 'recoil';
+import { useRecoilValue } from 'recoil';
 import { paymentBookListAtom } from '@/store/paymentBook/atom';
 import {
   BookItemOpenBoxStyle,
@@ -14,7 +14,7 @@ import { Button } from '@components//common/button';
 import { Text } from '@components/common/text';
 
 function Pickup() {
-  const [paymentBook, setPaymentBook] = useRecoilState(paymentBookListAtom);
+  const paymentBook = useRecoilValue(paymentBookListAtom);
 
   return (
     <>

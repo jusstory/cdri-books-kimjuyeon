@@ -86,7 +86,6 @@ const SearchBox = forwardRef(function SearchBox() {
     if (item.trim()) {
       await featchBookList(item)
         .then((res) => {
-          console.log('res', res);
           const filteringData = res.documents.map((item: any) => ({
             id: String(item.isbn).replace(/ /g, ''),
             thumbnail: item.thumbnail || '/images/img_no_image.png',
@@ -113,7 +112,6 @@ const SearchBox = forwardRef(function SearchBox() {
   };
   // 상세 검색 항목 선택
   const onClickMenu = (data: DropdownMenuPropsType) => {
-    console.log('click data', data);
     setSelectMenu(data);
   };
 
@@ -147,7 +145,6 @@ const SearchBox = forwardRef(function SearchBox() {
     if (kewordValue.trim()) {
       await refetchFunction()
         .then((res) => {
-          console.log('res.data', res.data);
           const filteringData = res.data.documents.map((item: any) => ({
             id: String(item.isbn).replace(/ /g, ''),
             thumbnail: item.thumbnail || '/images/img_no_image.png',
