@@ -88,8 +88,8 @@ const SearchBox = forwardRef(function SearchBox() {
         .then((res) => {
           console.log('res', res);
           const filteringData = res.documents.map((item: any) => ({
-            id: item.isbn,
-            thumbnail: item.thumbnail,
+            id: String(item.isbn).replace(/ /g, ''),
+            thumbnail: item.thumbnail || '/images/img_no_image.png',
             title: item.title,
             authors: item.authors,
             price: item.price,
@@ -149,8 +149,8 @@ const SearchBox = forwardRef(function SearchBox() {
         .then((res) => {
           console.log('res.data', res.data);
           const filteringData = res.data.documents.map((item: any) => ({
-            id: item.isbn,
-            thumbnail: item.thumbnail,
+            id: String(item.isbn).replace(/ /g, ''),
+            thumbnail: item.thumbnail || '/images/img_no_image.png',
             title: item.title,
             authors: item.authors,
             price: item.price,
