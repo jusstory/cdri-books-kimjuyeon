@@ -45,8 +45,18 @@ export const SearchBoxStyle = styled.div`
           display: flex;
           justify-content: space-between;
           align-items: center;
-          padding: 4px 0;
+          padding: 12px 0;
           padding-right: 25px;
+
+          p {
+            /* width: 100%; */
+            cursor: pointer;
+          }
+        }
+        button {
+          img {
+            display: block;
+          }
         }
 
         p,

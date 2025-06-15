@@ -71,6 +71,9 @@ const SearchBox = forwardRef(function SearchBox() {
       return newHistory.slice(0, 8);
     });
   };
+  const handleDeleteKeyword = (keyword) => {
+    setKeywordHistory((prev) => prev.filter((item) => item !== keyword));
+  };
   // 검색창에 포커스가 갈때
   const handleSearchInputFocus = () => {
     setIsSearchInputFocus(true);
@@ -205,14 +208,17 @@ const SearchBox = forwardRef(function SearchBox() {
             <ul className="keyword_list">
               {keywordHistory.map((item) => {
                 return (
-                  <li key={item} onClick={() => handleClickKeyword(item)}>
-                    <Text type="caption">{item}</Text>
+                  <li key={item}>
+                    <div onClick={() => handleClickKeyword(item)}>
+                      <Text type="caption">{item}</Text>
+                    </div>
                     <button>
                       <Image
                         src="/images/ico_close.svg"
                         alt=""
                         width={24}
                         height={24}
+                        onClick={() => handleDeleteKeyword(item)}
                       />
                     </button>
                   </li>
