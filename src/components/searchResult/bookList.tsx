@@ -1,18 +1,30 @@
 import React, { useState } from 'react';
-import { BookItemOpenBoxStyle, BookListItemStyle } from './resultStyle';
-import { List } from '../common/list';
-import { useRecoilValue } from 'recoil';
-import { searchResultAtom } from '@store/searchBook/atom';
 import Image from 'next/image';
-import { Title } from '../common/title';
-import { Text } from '@/components/common/text';
-import { ButtonWrapStyle } from '../common/button/buttonStyle';
-import { Button } from '../common/button';
+import {
+  BookItemOpenBoxStyle,
+  BookItemOpenThumbnailBoxStyle,
+  BookListItemStyle,
+} from './resultStyle';
+import { List } from '../common/list';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { searchResultAtom } from '@store/searchBook/atom';
+import { Title } from '@components/common/title';
+import { Text } from '@components/common/text';
+import { ButtonWrapStyle } from '@components/common/button/buttonStyle';
+import { Button } from '@components//common/button';
+import { pickupBookListAtom } from '@/store/pickupBook/atom';
+import { useRouter } from 'next/router';
+import { paymentBookListAtom } from '@/store/paymentBook/atom';
+import { BookDataType } from '@/store/bookType';
 
 function BookList() {
+  const router = useRouter();
   const searchResults = useRecoilValue(searchResultAtom);
   const [isOpenBody, setIsOpenBody] = useState(false);
   const [openBody, setOpenBody] = useState(null);
+  const [pickupBookList, setPickupBookList] =
+    useRecoilState(pickupBookListAtom);
+  const [paymentBook, setPaymentBook] = useRecoilState(paymentBookListAtom);
 
   const ListItem = ({ itemData }) => {
     const handleButtonClick = (selecItemData) => {
@@ -25,6 +37,32 @@ function BookList() {
         setIsOpenBody(true);
       }
     };
+    // 찜한 도서인지 체크
+    const checkedIsPickupBook = (checkBookId) => {
+      const isPickupBook = pickupBookList.some(
+        (item) => item.id === checkBookId,
+      );
+      return isPickupBook;
+    };
+    // 도서 찜하기
+    const handlePickupBook = (bookItemData) => {
+      console.log(bookItemData);
+      setPickupBookList((prev) => {
+        // 기존에 찜한 책인지 체크
+        const hasBookId = checkedIsPickupBook(bookItemData.id);
+
+        const newBookList = hasBookId
+          ? prev.filter((item) => item.id !== bookItemData.id)
+          : [...pickupBookList, bookItemData];
+        return newBookList;
+      });
+    };
+
+    const handlePaymentBook = (bookData: BookDataType) => {
+      console.log(bookData);
+      setPaymentBook(bookData);
+      router.push('/payment-book');
+    };
 
     return (
       <BookListItemStyle
@@ -33,13 +71,35 @@ function BookList() {
         {itemData &&
           (openBody === itemData.id && isOpenBody ? (
             <>
-              <Image
-                src={itemData.thumbnail}
-                alt=""
-                width={210}
-                height={280}
-                className="thumbnail"
-              />
+              <BookItemOpenThumbnailBoxStyle>
+                <button
+                  id="pickup_button"
+                  onClick={() => handlePickupBook(itemData)}
+                >
+                  {checkedIsPickupBook(itemData.id) ? (
+                    <Image
+                      src="/images/ico_heart_fill.svg"
+                      alt=""
+                      width={24}
+                      height={24}
+                    />
+                  ) : (
+                    <Image
+                      src="/images/ico_heart_line.svg"
+                      alt=""
+                      width={24}
+                      height={24}
+                    />
+                  )}
+                </button>
+                <Image
+                  src={itemData.thumbnail}
+                  alt=""
+                  width={210}
+                  height={280}
+                  className="thumbnail"
+                />
+              </BookItemOpenThumbnailBoxStyle>
               <BookItemOpenBoxStyle>
                 <div className="contents_wrap">
                   <div className="title_box">
@@ -90,7 +150,7 @@ function BookList() {
                     <Button
                       className="payment_button"
                       type="primary"
-                      onClick={() => handleButtonClick(itemData)}
+                      onClick={() => handlePaymentBook(itemData)}
                     >
                       <Text type="caption">구매하기</Text>
                     </Button>
@@ -124,7 +184,7 @@ function BookList() {
               <ButtonWrapStyle>
                 <Button
                   type="primary"
-                  onClick={() => handleButtonClick(itemData)}
+                  onClick={() => handlePaymentBook(itemData)}
                 >
                   <Text type="caption">구매하기</Text>
                 </Button>

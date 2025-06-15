@@ -55,7 +55,8 @@ export const BookListItemStyle = styled.div`
       padding-bottom: 24px;
 
       .thumbnail {
-        margin: 0 32px;
+        margin: 0;
+        margin-left: 48px;
       }
 
       .detail_button {
@@ -78,6 +79,21 @@ export const BookListItemStyle = styled.div`
           transform: rotate(0deg);
         }
       }
+    }
+  `}
+`;
+export const BookItemOpenThumbnailBoxStyle = styled.div`
+  ${({ theme }) => css`
+    position: relative;
+    display: flex;
+    gap: 16px;
+    width: auto;
+    margin-right: 48px;
+
+    #pickup_button {
+      position: absolute;
+      top: 8px;
+      right: 8px;
     }
   `}
 `;
@@ -135,6 +151,23 @@ export const BookItemOpenBoxStyle = styled.div`
           width: 240px;
           margin-top: 24px;
         }
+      }
+    }
+  `}
+`;
+
+export const PaymentBookBoxStyle = styled.div`
+  ${({ theme }) => css`
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    > div:last-child {
+      flex-direction: column;
+
+      & > div {
+        width: 100%;
       }
     }
   `}

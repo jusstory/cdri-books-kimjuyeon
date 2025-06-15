@@ -17,7 +17,6 @@ export const ListStyle = styled.ul`
 export const ListItemStyle = styled.li`
   ${({ theme }) => css`
     padding: 16px;
-    cursor: pointer;
     border-bottom: 1px solid ${theme.colors['palette-gray']};
   `}
 `;
