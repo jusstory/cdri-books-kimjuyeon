@@ -1,14 +1,13 @@
 import React, { forwardRef, useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
-import { Text } from '@/components/common/text';
-import { Searchbar } from '@/components/common/searchbar';
+import { Text } from '@components/common/text';
+import { Searchbar } from '@components/common/searchbar';
 import {
-  DetailSearchModalStyle,
   DetailSearchWrapStyle,
   SearchBoxStyle,
   SearchWrapStyle,
 } from './searchBoxStyle';
-import { Button } from '@/components/common/button';
+import { Button } from '@components/common/button';
 import { SearchCountBox } from './searchCountBox';
 import { useQuery } from '@tanstack/react-query';
 import { featchBookList } from '@/api/book/searchBook';
@@ -19,10 +18,9 @@ import {
   searchResultAtom,
   searchResultCountAtom,
 } from '@store/searchBook/atom';
-import { TextField } from '../common/textField';
-import { Dropdown } from '../common/dropdown';
 import { DropdownMenuPropsType } from '../common/dropdown/dropdownType';
 import useMounted from '@hooks/useMounted';
+import DetailSearchModal from './detailSearchModal';
 
 const SearchBox = forwardRef(function SearchBox() {
   const menuData = [
@@ -228,30 +226,15 @@ const SearchBox = forwardRef(function SearchBox() {
             <Text type="body2">상세검색</Text>
           </Button>
           {isDetailSearchOpen && (
-            <>
-              <div className="dim" onClick={detailSearchOpen}></div>
-              <DetailSearchModalStyle>
-                <div className="search_box">
-                  <Dropdown
-                    selectMenu={selectMenu}
-                    menuData={menuData}
-                    id={'book_serach_dropdown'}
-                    onClick={onClickMenu}
-                  />
-                  <TextField
-                    id="datail_search"
-                    value={searchDetailValue}
-                    onChange={handleChange}
-                  />
-                </div>
-                <Button
-                  type="primary"
-                  onClick={() => handleSearchButton('detail')}
-                >
-                  <Text type="caption">검색하기</Text>
-                </Button>
-              </DetailSearchModalStyle>
-            </>
+            <DetailSearchModal
+              detailSearchOpen={detailSearchOpen}
+              selectMenu={selectMenu}
+              menuData={menuData}
+              onClickMenu={onClickMenu}
+              searchDetailValue={searchDetailValue}
+              handleChange={handleChange}
+              onClickearchButton={() => handleSearchButton('detail')}
+            />
           )}
         </DetailSearchWrapStyle>
       </SearchBoxStyle>

@@ -12,5 +12,9 @@ export const SearchbarStyle = styled.div`
     padding: 10px;
     border-radius: 25px;
     background-color: ${theme.colors['palette-lightGray']};
+
+    input {
+      width: 100%;
+    }
   `}
 `;
