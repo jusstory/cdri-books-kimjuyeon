@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Image from 'next/image';
 import { Title } from '@components/common/title';
 import { DropdownStyle, MenuStyle } from './dropdownStyle';
 import { DropdownMenuPropsType, DropdownPropsType } from './dropdownType';
@@ -52,7 +53,7 @@ function Dropdown({
         <Title role={3} className="book_title">
           {titleMenu?.menu}
         </Title>
-        <img src="/images/ico_arrowLine.svg" alt="" />
+        <Image src="/images/ico_arrowLine.svg" alt="" width={14} height={8} />
       </div>
       {isOpen && (
         <MenuStyle>
