@@ -1,36 +1,65 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## 프로젝트 개요
 
-## Getting Started
+이 프로젝트는 CDRI 프론트엔드 개발 사전과제로 '도서 검색' 및 '도서 찜하기'의 기능을 제공합니다.
+사용자는 검색어를 통해 원하는 도서를 검색할 수 있으며, 제목, 출판사, 저자명의 필터링 기능도 사용할 수 있습니다.
+도서를 검색하고 원하는 도서를 찜 목록에 추가하거나 제거하여 관리할 수 있고, 검색 기록(최대 8개) 관리, 도서의 상세정보를 살펴볼 수 있습니다.
+추후 프로젝트 확장에 대해 고려하여 공통 컴포넌트를 분리하여 관리하고, 반응형 확장시 수월할 수 있게 스타일링 되어 있습니다.
 
-First, run the development server:
+## 실행 방법 및 환경 설정
 
 ```bash
+// 패키지 설치
+npm install
+
+// 개발서버 실행
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+.env.development 파일에 다음 항목을 설정해야 합니다.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+NEXT_PUBLIC_REST_API_URL
+NEXT_PUBLIC_REST_API_KEY
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 주요 코드 설명
 
-## Learn More
+```
+src/
+├── api/                  # 도서 검색 API
+├── components/           # 컴포넌트 관리
+│   ├── common/           # 공통 UI 컴포넌트 (Text, Button,Dropdown 등)
+│   ├── header/           # header 컴포넌트
+│   ├── searchBox/        # 검색창 및 상세검색 모달 관리 컴포넌트
+│   └── searchResult/     # 검색 결과 리스트 관리(도서검색, 내가 찜한 책 리스트 공통)
+├── hooks/                # custom hook 관리
+├── pages/                # 라우팅 기반 페이지 (도서 검색, 내가 찜한 책, 구매하기 등)
+├── store/                # Recoil 상태 관리 Atom
+│   ├── paymentBook/      # 구매할 책 관련 관련 상태
+│   ├── pickupBook/       # 찜한 도서 관련 상태
+│   └── searchBook/       # 검색 결과, 검색어 관련 상태
+└── styles/               # 공통 스타일 정의(global-style.ts, theme.ts 등)
+```
 
-To learn more about Next.js, take a look at the following resources:
+## 주요 코드 설명
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+`SearchBox` : 도서 검색, 상세검색 제공. 검색 api 사용
+`BookList` : 검색 결과/내가 찜한 도서 목록을 조건부 렌더링
+`BookListItem` : 도서 검색 결과의 도서 정보를 처리. 상세,구매,찜하기 기능
+`keywordHistoryAtom`,`pickupBookListAtom` : 로컬스토리지 연동으로 키워드, 찜한 책 목록 상태관리
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 라이브러리 선택 이유
 
-## Deploy on Vercel
+- Next.js
+  : 페이지 기반 라우팅으로 직관적인 폴더관리 가능, ssr 지원으로 검색 엔진 최적화 seo 관리에 용이, 사용자에게 빠른 초기 렌더링 제공 가능.
+- recoil : 간단하고 직관적인 전역 상태 관리 가능. react-query와 함께 사용시, 서버 상태과 클라이언트 상태를 명확히 분리하여 사용하기에 용이.
+- styled-components : css-in-js 방식으로 컴포넌트 단위의 스타일 관리 가능. ui와 스타일 분리하여 직관적으로 스타일 관리 및 유지보수 용이. 조건부 스타일링 가능으로 복잡한 ui 개발에 유리.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 강조 하고 싶은 기능
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- 일부 상태의 로컬스토리지 동기화 관리(검색기/찜한 도서 목록/구매할 책)
+  : 사용자가 검색한 키워드 히스토리와 찜한 도서 정보, 구매할 책 정보를 로컬스토리지에 저장하여 새로고침 혹은 페이지 이탈 시에도 유지하여 해당 페이지로 바로 접근시 원활한 서비스 제공을 구현.
+- 검색 조건에 따라 동작이 다른 검색 함수 구현
+  : 상세 검색, 일반 검색 여부, 검색 히스토리 목록 클릭에 의한 외부 키워드 클릭 검색 여부 등의 다양한 조건의 검색을 처리하면서 코드 중복을 줄이고 가독성을 높임.
+- 디자인 스타일 기반 공통 컴포넌트 관리
+  : 디자인에 정의된 디자인 스타일을 기반으로 공통 컴포넌트를 구축하여 다양한 개발에 사용될 수 있도록 설계. 추후 프로젝트 확장 시 재사용성과 유지보수성에 용이한 구조.
